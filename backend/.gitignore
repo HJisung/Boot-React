@@ -4,3 +4,4 @@ bin/
 .idea/
 *.iml
 application-local.properties
+upload/
