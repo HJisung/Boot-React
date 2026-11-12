@@ -1,20 +1,23 @@
-import { createSearchParams, useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { useParams } from "react-router-dom";
+import ReadComponent from "../../components/todo/ReadComponent";
 
-export default function ReadPage() {
-  const { tno } = useParams()
-  const navigate = useNavigate()
-  const [params] = useSearchParams()
-  const page = params.get('page') || '1'
-  const size = params.get('size') || '10'
-  const search = createSearchParams({ page, size }).toString()
+const ReadPage = () => {
 
-  return (
-    <div className="text-3xl font-extrabold">
-      Todo Read Page Component {tno}
-      <div>
-        <button onClick={() => navigate({ pathname: `/todo/modify/${tno}`, search })}>Test Modify</button>{' '}
-        <button onClick={() => navigate({ pathname: '/todo/list', search })}>Test List</button>
-      </div>
-    </div>
-  )
+    const {tno} = useParams()
+
+    return ( 
+      <div className="font-extrabold w-full bg-white mt-6">
+
+        <div className="text-2xl ">
+          Todo Read Page Component {tno}
+        </div>
+        
+        <ReadComponent tno={tno}></ReadComponent>
+        
+      </div> 
+
+    );
+
 }
+ 
+export default ReadPage;
