@@ -1,9 +1,9 @@
-import { useSelector } from "react-redux";
+import useCustomLogin from "../../hooks/useCustomLogin";
 import { Link } from "react-router-dom";
 
 const BasicMenu = () => {
 
-    const loginState = useSelector(state => state.loginSlice)
+    const { loginState } = useCustomLogin()
 
     return (  
     <nav id='navbar' className=" flex  bg-blue-300">

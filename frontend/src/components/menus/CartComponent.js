@@ -1,4 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import { cartTotalState } from "../../atoms/cartState";
 import useCustomLogin from "../../hooks/useCustomLogin";
 import useCustomCart from "../../hooks/useCustomCart";
 import CartItemComponent from "../cart/CartItemComponent";
@@ -10,17 +12,7 @@ const CartComponent = () => {
     const {refreshCart, cartItems, changeCart } = useCustomCart()
     const [error, setError] = useState('')
 
-    const total = useMemo(() => {
-
-      let total = 0
-
-      for(const item of cartItems) {
-        total += item.price * item.qty
-      }
-
-      return total
-
-    },[cartItems])
+    const total = useRecoilValue(cartTotalState)
 
     useEffect(() => {
 
