@@ -5,6 +5,7 @@ import FetchingModal from "../common/FetchingModal";
 
 import { API_SERVER_HOST } from "../../api/todoApi";
 import PageComponent from "../common/PageComponent";
+import useCustomLogin from "../../hooks/useCustomLogin";
 
 const host = API_SERVER_HOST
 
@@ -25,13 +26,13 @@ const ListComponent = () => {
 
     const {page, size, refresh, moveToList, moveToRead} = useCustomMove()
 
+    const {exceptionHandle} = useCustomLogin()
     
     //serverData는 나중에 사용
     const [serverData, setServerData] = useState(initState)
 
     //for FetchingModal 
     const [fetching, setFetching] = useState(false)
-    const [error, setError] = useState('')
 
     useEffect(() => {
 
@@ -40,11 +41,10 @@ const ListComponent = () => {
       getList({page,size}).then(data => {
         console.log(data)
         setServerData(data)
-        setError('')
         setFetching(false)
-      }).catch(() => {
-        setError('상품 목록을 불러오지 못했습니다. 서버 상태를 확인해 주세요.')
+      }).catch( err => {
         setFetching(false)
+        exceptionHandle(err)
       })
 
     }, [page,size, refresh])
@@ -53,7 +53,6 @@ const ListComponent = () => {
       <div className="border-2 border-blue-100 mt-10 mr-2 ml-2">
     
         {fetching? <FetchingModal/> :<></>}
-        {error && <p className="p-4 text-red-600">{error}</p>}
     
         <div className="flex flex-wrap mx-auto p-6">
     

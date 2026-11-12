@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getList } from "../../api/todoApi";
 import useCustomMove from "../../hooks/useCustomMove";
 import PageComponent from "../common/PageComponent";
+import useCustomLogin from "../../hooks/useCustomLogin";
 
 const initState = {
     dtoList:[],
@@ -19,6 +20,7 @@ const initState = {
 const ListComponent = () => {
 
     const {page, size, refresh, moveToList, moveToRead} = useCustomMove()//refresh
+    const {exceptionHandle} = useCustomLogin()
 
     //serverData는 나중에 사용
     const [serverData, setServerData] = useState(initState)
@@ -28,7 +30,7 @@ const ListComponent = () => {
       getList({page,size}).then(data => {
         console.log(data)
         setServerData(data)
-      })
+      }).catch(err => exceptionHandle(err))
 
     }, [page,size, refresh])
 
