@@ -17,11 +17,6 @@ const loadMemberCookie = () => {  //쿠키에서 로그인 정보 로딩
 
     const memberInfo =  getCookie("member")
 
-    //닉네임 처리 
-    if(memberInfo && memberInfo.nickname) {
-      memberInfo.nickname = decodeURIComponent(memberInfo.nickname)
-    }
-
     return memberInfo
 }
 
@@ -30,12 +25,9 @@ const loginSlice = createSlice({
     initialState: loadMemberCookie()|| initState, //쿠키가 없다면 초깃값사용 
     reducers: {
       login: (state, action) => {
-        console.log("login.....")
-        //{email, pw로 구성 }
         const data = action.payload
-        
-        //새로운 상태 
-        return {email: data.email}
+        if (data?.accessToken && data?.refreshToken) setCookie("member", JSON.stringify(data), 1)
+        return data
 
       },
       logout: (state, action) => {
@@ -51,11 +43,6 @@ const loginSlice = createSlice({
         console.log("fulfilled")
 
         const payload = action.payload
-
-        //닉네임 한글 처리 
-        if(payload.nickname){
-          payload.nickname = encodeURIComponent(payload.nickname)
-        }
 
         //정상적인 로그인시에만 저장 
         if(!payload.error){

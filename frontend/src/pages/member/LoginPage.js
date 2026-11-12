@@ -1,5 +1,6 @@
 import LoginComponent from "../../components/member/LoginComponent";
 import BasicMenu from "../../components/menus/BasicMenu";
+import KakaoLoginComponent from "../../components/member/KakaoLoginComponent";
 
 const LoginPage = () => {
     return ( 
@@ -8,7 +9,10 @@ const LoginPage = () => {
         <BasicMenu/>
 
         <div className="w-full flex flex-wrap  h-full justify-center  items-center border-2">
-          <LoginComponent/>
+          <div className="w-full max-w-xl">
+            <LoginComponent/>
+            <KakaoLoginComponent/>
+          </div>
         </div>  
       </div>
      );
