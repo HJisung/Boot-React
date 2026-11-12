@@ -8,12 +8,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.zerock.mallapi.util.CustomJWTException;
 
 /**
  * CustomControllerAdvice
  */
 @RestControllerAdvice
 public class CustomControllerAdvice {
+
+    @ExceptionHandler(CustomJWTException.class)
+    protected ResponseEntity<?> handleJWTException(CustomJWTException error) {
+        return ResponseEntity.ok(Map.of("error", error.getMessage()));
+    }
 
     @ExceptionHandler(NoSuchElementException.class)
     protected ResponseEntity<?> notExist(NoSuchElementException e) {
