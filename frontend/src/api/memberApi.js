@@ -14,7 +14,6 @@ export const loginPost = async (loginParam) => {
 }
 
 export const modifyMember = async (member) => {
-    const modifyHost = import.meta.env.VITE_MEMBER_API_HOST || API_SERVER_HOST
-    const res = await jwtAxios.put(`${modifyHost}/api/member/modify`, member)
+    const res = await jwtAxios.put(`${host}/modify`, member)
     return res.data
 }

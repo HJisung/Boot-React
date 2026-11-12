@@ -5,6 +5,6 @@ npm install
 npm run dev
 ```
 
-카카오 로그인 화면 설정은 `frontend/.env.local`에서 지정합니다.
-`.env.example`의 항목에 카카오 디벨로퍼스의 REST API 키와 등록한 Redirect URI를 입력할 수 있습니다.
-실제 카카오 로그인 및 회원정보 저장은 별도의 서버 연동이 필요합니다.
+카카오 로그인 설정은 `backend/src/main/resources/application-local.properties`에서 지정합니다.
+`kakao.rest-api-key`, `kakao.client-secret`, `kakao.redirect-uri`를 설정한 뒤 백엔드를 재시작합니다.
+이 로컬 설정 파일은 Git에 포함되지 않습니다.

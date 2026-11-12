@@ -56,7 +56,6 @@ const ModifyComponent = () => {
 
       {result? <ResultModal title={'회원정보'} content={'정보수정완료'} callbackFn={colseModal}></ResultModal>:<></>}
       {error && <p className="p-4 text-red-600">{error}</p>}
-      {import.meta.env.VITE_MEMBER_API_HOST && <p className="p-4 text-sm text-gray-600">실습 모드: 수정 내용은 실제 계정에 저장되지 않습니다.</p>}
 
       <div className="flex justify-center">
         <div className="relative mb-4 flex w-full flex-wrap items-stretch">
